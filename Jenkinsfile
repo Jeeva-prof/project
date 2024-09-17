@@ -4,8 +4,8 @@ pipeline {
         stage('build project'){
             steps{
                 git url:'https://github.com/Jeeva-prof/project.git', branch: "master"
-                sh 'mvn clean package'
-              
+	        sh 'mvn clean package'
+            
             }
         }
         stage('Build docker image'){
@@ -24,13 +24,12 @@ pipeline {
                     sh 'docker push 10551jeeva/staragileprojectfinance:v1'
                 }
             } 
-        
+ 	}       
      stage('Deploy') {
             steps {
                 sh 'sudo docker run -itd --name container1 -p 8083:8081 10551jeeva/staragileprojectfinance:v1'
                   
                 }
             }
-        
-    }
+        }
 }
