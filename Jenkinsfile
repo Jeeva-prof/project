@@ -11,7 +11,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t 10551jeeva/staragileprojectfinance:v1'
+                    sh 'docker build -t 10551jeeva/staragileprojectfinance:v1 . '
                     sh 'docker images'
                 }
             }
