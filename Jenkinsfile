@@ -47,13 +47,10 @@ pipeline {
             steps {
 		sh'sudo su'
 		sh'su - devops'
-                sh 'sudo ansible-playbook testserver.yml'
-		}
+        sh 'sudo ansible-playbook testserver.yml'
+		          }
 	    }
-	}	    
-       
-	    
-     	stage('Deploy to production server') {
+	   	stage('Deploy to production server') {
             steps {
 		sh'sudo su'
 		sh'su - devops'
@@ -62,4 +59,4 @@ pipeline {
                 }
             }
         }
-}
+    }   
