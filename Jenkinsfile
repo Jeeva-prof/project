@@ -45,8 +45,8 @@ pipeline {
  	}       
      	stage('Deploy to testserver') {
             steps {
-		withCredentials([usernamePassword(credentialsId: 'devops-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                sh "echo $PASS | su - $USER "
+		sh'sudo su'
+		sh'su - devops'
                 sh 'sudo ansible-playbook testserver.yml'
 		}
 	    }
@@ -55,8 +55,9 @@ pipeline {
 	    
      	stage('Deploy to production server') {
             steps {
-		sh 'su - devops'
-                sh 'sudo ansible-playbook productionserver.yml'
+		sh'sudo su'
+		sh'su - devops'
+		sh 'sudo ansible-playbook productionserver.yml'
                   
                 }
             }
