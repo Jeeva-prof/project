@@ -1,9 +1,24 @@
 pipeline {
     agent any
     stages{
+        stage('checkout SCM'){
+            steps{
+	        git 'https://github.com/Jeeva-prof/project.git'
+            }
+        }
+        stage('compile project'){
+            steps{
+	        sh 'mvn compile'           
+            }
+        }
+        stage('test project'){
+            steps{
+	        sh 'mvn compile'           
+            }
+        }
         stage('build project'){
             steps{
-                git url:'https://github.com/Jeeva-prof/project.git', branch: "master"
+                
 	        sh 'mvn clean package'
             
             }
@@ -11,7 +26,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t 10551jeeva/staragileprojectfinance:v1 . '
+                    sh 'docker build -t 10551jeeva/finance:v1 . '
                     sh 'docker images'
                 }
             }
@@ -21,13 +36,21 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh 'docker push 10551jeeva/staragileprojectfinance:v1'
+                    sh 'docker push 10551jeeva/finance:v1'
                 }
             } 
  	}       
-     stage('Deploy') {
+     stage('Deploy to testserver') {
             steps {
-                sh 'sudo docker run -itd --name container1 -p 8083:8081 10551jeeva/staragileprojectfinance:v1'
+		sh 'sudo su'
+                sh 'sudo ansible-playbook testserver.yml'
+                  
+                }
+            }
+     stage('Deploy to production server') {
+            steps {
+		sh 'sudo su'
+                sh 'sudo ansible-playbook productionserver.yml'
                   
                 }
             }
