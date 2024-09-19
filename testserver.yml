@@ -22,7 +22,7 @@
           image: 10551jeeva/finance:v1
           state: started
           ports:
-	    - 8083:8081 
+	     - 8083:8081 
       - name: Config prometheus
         ansible.builtin.copy:
             src: prometheus/prometheus_test.yml
