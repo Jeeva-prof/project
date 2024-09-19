@@ -46,7 +46,7 @@ pipeline {
      	stage('Deploy to testserver') {
             steps {
 		withCredentials([usernamePassword(credentialsId: 'devops-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                sh "echo $PASS | su - $USER --password-stdin"
+                sh "echo $PASS | su - $USER "
                 sh 'sudo ansible-playbook testserver.yml'
 		}
 	    }
