@@ -45,7 +45,7 @@ pipeline {
  	}       
      stage('Deploy to testserver') {
             steps {
-		sh 'su - devops'
+		sh 'su - devops && \'\'
                 sh 'sudo ansible-playbook testserver.yml'
                   
                 }
