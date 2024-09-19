@@ -16,6 +16,9 @@
         state: started
         ports:
           - 8083:8081
+    - name: install prometheus
+      apt: name=prometheus state=present
+
     - name: Config prometheus
       ansible.builtin.copy:
         src: promethus/prometheus_test.yml
