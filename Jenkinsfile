@@ -18,9 +18,12 @@ pipeline {
         }
         stage('build project'){
             steps{
-                
 	        sh 'mvn clean package'
-            
+            }
+        }
+        stage('qa project'){
+            steps{
+                sh 'mvn checkstyle:checkstyle'
             }
         }
         stage('Build docker image'){
