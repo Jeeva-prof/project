@@ -22,7 +22,7 @@
         state: present
     - name: Config prometheus
       ansible.builtin.copy:
-        src: prometheus/prometheus_production.yml
+        src: /prometheus/prometheus_production.yml
         dest: /etc/prometheus/prometheus.yml
         owner: devops
     - name: Config prometheus
