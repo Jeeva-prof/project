@@ -17,9 +17,9 @@
         ports:
           - 8083:8081
     - name: Config prometheus
-      shell: git clone https://github.com/Jeeva-prof/project
+   //  shell: git clone https://github.com/Jeeva-prof/project
       ansible.builtin.copy:
-        src: project/prometheus/prometheus_test.yml
+        src: promethus/prometheus_test.yml
         dest: /etc/prometheus/prometheus.yml
         owner: devops
     - name: Config prometheus
