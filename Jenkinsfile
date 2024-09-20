@@ -18,9 +18,12 @@ pipeline {
         }
         stage('build project'){
             steps{
-                
 	        sh 'mvn clean package'
-            
+            }
+        }
+        stage('qa project'){
+            steps{
+                sh 'mvn checkstyle:checkstyle'
             }
         }
         stage('Build docker image'){
@@ -40,19 +43,16 @@ pipeline {
                 }
             } 
  	}       
-     stage('Deploy to testserver') {
+     	stage('Deploy to testserver') {
             steps {
-		sh 'sudo su'
-                sh 'sudo ansible-playbook testserver.yml'
-                  
-                }
-            }
-     stage('Deploy to production server') {
+		   sh 'sudo ansible-playbook testserver.yml'
+		          }
+	    }
+	   	stage('Deploy to production server') {
             steps {
-		sh 'sudo su'
-                sh 'sudo ansible-playbook productionserver.yml'
-                  
+		sh 'sudo ansible-playbook productionserver.yml'
+                
                 }
             }
         }
-}
+    }   
