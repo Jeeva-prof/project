@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('checkout SCM'){
             steps{
-	        git credentialsId: 'git-pwd', url: 'https://github.com/Jeeva-prof/project.git'
+	        git 'https://github.com/Jeeva-prof/project.git'
             }
         }
         stage('compile project'){
