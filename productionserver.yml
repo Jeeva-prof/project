@@ -25,4 +25,4 @@
         src: promethus/prometheus_production.yml
         dest: /etc/prometheus/prometheus.yml
     - name: Config prometheus
-      shell: sudo systemctl enable prometheus
+      shell: sudo systemctl restart prometheus

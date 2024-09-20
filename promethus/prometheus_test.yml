@@ -37,12 +37,11 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: TEST-server
+  - job_name: testserver
     # If prometheus-node-exporter is installed, grab stats about the local
     # machine by default.
     static_configs:
       - targets: ['localhost:9100']
   - job_name: docker-test
-
     static_configs:
       - targets: ['localhost:9323']

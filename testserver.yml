@@ -25,4 +25,4 @@
         dest: /etc/prometheus/prometheus.yml
         owner: devops
     - name: Config prometheus
-      shell: sudo systemctl enable prometheus
+      shell: sudo systemctl restart prometheus
