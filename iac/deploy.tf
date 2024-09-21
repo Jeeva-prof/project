@@ -3,7 +3,6 @@ import {
   to = aws_security_group.app_SG
   id = "sg-0b581c1f2b03eeaf5"
 }
-}
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
   public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP/vYB7ZgCxcwRPGP4kJoPttUs5aCrsBWj0QdgBVdJ8D root@master"
