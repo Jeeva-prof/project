@@ -1,6 +1,6 @@
 ---
 - name: Deploying in test server
-  hosts: testserver
+  hosts: all
   become: yes
   tasks:
     - name: update apt
@@ -11,7 +11,7 @@
         state: present
     - name: Start Docker container
       docker_container:
-        name: container
+        name: testcontainer
         image: 10551jeeva/finance:v1
         state: started
         ports:
@@ -21,8 +21,7 @@
 
     - name: Config prometheus
       ansible.builtin.copy:
-        src: promethus/prometheus_test.yml
+        src: prometheus/prometheus_test.yml
         dest: /etc/prometheus/prometheus.yml
-        owner: devops
-    - name: Config prometheus
+    - name: Start prometheus
       shell: sudo systemctl restart prometheus

@@ -43,14 +43,31 @@ pipeline {
                 }
             } 
  	}       
+     	stage('Create testserver') {
+            steps {
+           sh 'cd /iac'   
+		   sh 'sudo terraform init'
+           sh 'sudo terraform apply --auto-approve'
+           sh 'sudo terraform output -raw testip >testhost | sudo sed -i 's/$/  ansible_user=ubuntu/' testhost '
+           //sh 'sudo terraform output -raw prodip >prodhost | sudo sed -i 's/$/ansible_user=ubuntu/' prodhost '
+		          }
+	    }
      	stage('Deploy to testserver') {
             steps {
-		   sh 'sudo ansible-playbook testserver.yml'
+		   sh 'sudo ansible-playbook -i iac/testhost testserver.yml'
+		          }
+	    }
+     	stage('Create production server') {
+            steps {
+           sh 'sudo pwd'
+           sh 'cd /iac'
+           sh 'sudo terraform output -raw prodip >prodhost'
+           sh 'sudo sed -i 's/$/  ansible_user=ubuntu/' prodhost '
 		          }
 	    }
 	   	stage('Deploy to production server') {
             steps {
-		sh 'sudo ansible-playbook productionserver.yml'
+		sh 'sudo ansible-playbook -i iac/prodhost productionserver.yml'
                 
                 }
             }
