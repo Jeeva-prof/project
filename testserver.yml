@@ -3,8 +3,10 @@
   hosts: all
   become: yes
   tasks:
-    - name: update apt
-      shell: sudo apt update
+    - name: Update and upgrade apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
     - name: install Docker
       apt:
         name: docker.io
