@@ -8,7 +8,7 @@ resource "aws_instance" "EC2" {
   key_name        = "deployer-key"
   availability_zone = "ap-south-1a"
   associate_public_ip_address = true
-  vpc_security_group_ids = "sg-0b581c1f2b03eeaf5"
+  
   tags = {
     Name = "test-server"
   }
@@ -20,7 +20,7 @@ resource "aws_instance" "EC21" {
   key_name        = "deployer-key"
   availability_zone = "ap-south-1a"
   associate_public_ip_address = true
-  vpc_security_group_ids = "sg-0b581c1f2b03eeaf5"
+  
   tags = {
     Name = "production-server"
   }
