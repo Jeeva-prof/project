@@ -3,8 +3,8 @@
   hosts: all
   become: yes
   tasks:
-    - name: update apt
-      apt: update_cache=yes
+  #  - name: update apt
+   #   apt: update_cache=yes
     - name: install Docker
       apt:
         name: docker.io
