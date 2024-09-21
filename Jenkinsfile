@@ -48,7 +48,8 @@ pipeline {
            sh 'cd /iac'   
 		   sh 'sudo terraform init'
            sh 'sudo terraform apply --auto-approve'
-           sh 'sudo terraform output -raw testip >testhost | sudo sed -i 's/$/  ansible_user=ubuntu/' testhost '
+           sh 'sudo terraform output -raw testip >testhost '
+	   sh 'sudo sed -i 's/$/  ansible_user=ubuntu/' testhost '
            //sh 'sudo terraform output -raw prodip >prodhost | sudo sed -i 's/$/ansible_user=ubuntu/' prodhost '
 		          }
 	    }
