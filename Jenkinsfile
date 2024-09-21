@@ -45,7 +45,7 @@ pipeline {
  	}       
      	stage('Create testserver') {
             steps {
-           sh 'cd /iac'   
+           sh 'cd iac'   
 		   sh 'sudo terraform init'
            sh 'sudo terraform apply --auto-approve'
            sh 'sudo terraform output -raw testip >testhost '
@@ -61,7 +61,7 @@ pipeline {
      	stage('Create production server') {
             steps {
            sh 'sudo pwd'
-           sh 'cd /iac'
+           sh 'cd iac'
            sh 'sudo terraform output -raw prodip >prodhost'
            sh 'sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '
 		          }
