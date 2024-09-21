@@ -48,8 +48,8 @@ pipeline {
            sh '''cd iac 
 		sudo terraform init
 		sudo terraform apply --auto-approve
-		sudo sed -i \\\'s/$/  ansible_user=ubuntu/\\\' testhost '''
-	  // sh 'sudo terraform output -raw prodip >prodhost | sudo sed -i 's/$/ansible_user=ubuntu/' prodhost '
+		sudo terraform output -raw testip >testhost
+		sudo sed -i \'s/$/  ansible_user=ubuntu/\' testhost '''
 		          }
 	    }
      	stage('Deploy to testserver') {
@@ -59,10 +59,10 @@ pipeline {
 	    }
      	stage('Create production server') {
             steps {
-           sh 'sudo pwd'
-           sh 'cd iac'
-           sh 'sudo terraform output -raw prodip >prodhost'
-           sh 'sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '
+           sh '''sudo pwd
+		cd iac
+		sudo terraform output -raw prodip >prodhost
+		sudo sed -i \\\'s/$/  ansible_user=ubuntu/\\\' prodhost '''
 		          }
 	    }
 	   	stage('Deploy to production server') {
