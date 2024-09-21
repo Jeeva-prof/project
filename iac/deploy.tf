@@ -1,46 +1,8 @@
 // Create Security Group
-resource "aws_security_group" "app_SG" {
-  name        = "finance_sg"
-  
-  ingress {
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-  ingress {
-    from_port        = 9090
-    to_port          = 9090 
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-  ingress {
-    from_port        = 9100
-    to_port          = 9100
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-  ingress {
-    from_port        = 8083
-    to_port          = 8083
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-
-  tags = {
-    Name = "finance_sg"
-  }
+import {
+  to = aws_security_group.app_SG
+  id = "sg-0b581c1f2b03eeaf5"
+}
 }
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
