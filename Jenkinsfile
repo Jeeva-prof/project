@@ -49,7 +49,7 @@ pipeline {
 		sudo terraform init
 		sudo terraform apply --auto-approve
 		sudo terraform output -raw testip >testhost | pwd
-  		sudo sed -i -e \'s/localhost/$(cat testhost)/\' test_ds_.yaml
+  		sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' test_ds_.yaml | pwd
     		sudo cp test_ds_.yaml /etc/grafana/provisioning/datasources/
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' testhost'''   
 		          }
@@ -64,7 +64,7 @@ pipeline {
       		sh '''sudo pwd
 		cd iac
 		sudo terraform output -raw prodip >prodhost
-  		sudo sed -i -e \'s/localhost/$(cat prodhost)/\' prod_ds_.yaml
+  		sudo sed -i -e \'\'s/localhost/$(cat prodhost)/\'\' prod_ds_.yaml
   		sudo cp prod_ds_.yaml /etc/grafana/provisioning/datasources/
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '''
 		          }
@@ -77,7 +77,7 @@ pipeline {
             }
 	 stage('Setup continous monitoring ') {
             steps {
-		sh 'sudo ansible-playbook g/playbookgrafana.yaml'
+		sh '''sudo pwd | sudo ansible-playbook g/playbookgrafana.yaml'''
                 
                 }
             }
