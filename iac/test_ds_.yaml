@@ -27,10 +27,10 @@ datasources:
       graphiteVersion: '1.1'
       # <bool> Enables TLS authentication using a client
       # certificate configured in secureJsonData.
-      tlsAuth: true
+      tlsAuth: false
       # <bool> Enables TLS authentication using a CA
       # certificate.
-      tlsAuthWithCACert: true
+      tlsAuthWithCACert: false
     # <map> Fields to encrypt before storing in jsonData.
     secureJsonData:
       # <string> Defines the CA cert, client cert, and
@@ -47,4 +47,4 @@ datasources:
     version: 1
     # <bool> Allows users to edit data sources from the
     # Grafana UI.
-    editable: false
+    editable: true
