@@ -50,7 +50,7 @@ pipeline {
 		sudo terraform apply --auto-approve
 		sudo terraform output -raw testip >testhost
   		cd ..
-		sudo sed -i \'s/localhost/$(cat iac/testhost)/\' g/ds/test_ds_.yaml 
+		sudo sed -i -e \'s/localhost/$(cat iac/testhost)/\' g/ds/test_ds_.yaml 
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' testhost'''   
 		          }
 	    }
@@ -65,7 +65,7 @@ pipeline {
 		cd iac
 		sudo terraform output -raw prodip >prodhost
   		cd ..
-		sudo sed -i \'s/localhost/$(cat iac/prodhost)/\'  g/ds/prod_ds_.yaml
+		sudo sed -i -e \'s/localhost/$(cat iac/prodhost)/\'  g/ds/prod_ds_.yaml
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '''
 		          }
 	    }
