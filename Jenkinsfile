@@ -65,7 +65,7 @@ pipeline {
       		sh '''sudo pwd
 		cd iac
 		sudo terraform output -raw prodip >prodhost
-        sudo sed -i -e \'\'s/localhost/$(cat prodhost)/\'\' prometheus_production.yml
+        #sudo sed -i -e \'\'s/localhost/$(cat prodhost)/\'\' prometheus_production.yml
         sudo sed -i -e \'\'s/localhost/$(cat prodhost)/\'\' prod_ds_.yaml
   		sudo cp prod_ds_.yaml /etc/grafana/provisioning/datasources/
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '''
