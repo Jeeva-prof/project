@@ -18,10 +18,3 @@
           - 8083:8081
     - name: install prometheus
       apt: name=prometheus state=present
-
-    - name: Config prometheus
-      ansible.builtin.copy:
-        src: prometheus/prometheus_test.yml
-        dest: /etc/prometheus/prometheus.yml
-    - name: Start prometheus
-      shell: sudo systemctl restart prometheus
