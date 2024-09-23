@@ -49,8 +49,8 @@ pipeline {
 		sudo terraform init
 		sudo terraform apply --auto-approve
 		sudo terraform output -raw testip >testhost
-  		cd ..
-		sudo sed -i -e \'s/localhost/$(cat iac/testhost)/\' g/ds/test_ds_.yaml 
+  		sudo sed -i -e \'s/localhost/$(cat testhost)/\' test_ds_.yaml
+    		cp test_ds_.yaml /g/ds/
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' testhost'''   
 		          }
 	    }
