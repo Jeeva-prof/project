@@ -50,7 +50,7 @@ pipeline {
 		sudo terraform apply --auto-approve
 		sudo terraform output -raw testip >testhost
   		sudo sed -i -e \'s/localhost/$(cat testhost)/\' test_ds_.yaml
-    		cp test_ds_.yaml /g/ds/
+    		cp test_ds_.yaml g/ds/test_ds_.yaml
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' testhost'''   
 		          }
 	    }
