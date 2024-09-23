@@ -45,12 +45,12 @@ pipeline {
  	}       
      	stage('Create testserver') {
             steps {
-           sh '''cd iac 
+	        sh '''cd iac 
 		sudo terraform init
 		sudo terraform apply --auto-approve
 		sudo terraform output -raw testip >testhost
-		sudo sed -i \\\'s/localhost/$(cat testhost)/\\\'  g/ds/test_ds.yaml 
-		sudo sed -i \\\'s/$/  ansible_user=ubuntu/\\\' testhost'''
+		sudo sed -i \'s/localhost/$(cat testhost)/\' g/ds/test_ds.yaml 
+		sudo sed -i \'s/$/  ansible_user=ubuntu/\' testhost'''   
 		          }
 	    }
      	stage('Deploy to testserver') {
@@ -64,7 +64,7 @@ pipeline {
 		cd iac
 		sudo terraform output -raw prodip >prodhost
 		sudo sed -i \'s/localhost/$(cat prodhost)/\'  g/ds/prod_ds.yaml
-		sudo sed -i \\\'s/$/  ansible_user=ubuntu/\\\' prodhost '''
+		sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '''
 		          }
 	    }
 	 stage('Deploy to production server') {
