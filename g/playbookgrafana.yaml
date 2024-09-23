@@ -4,6 +4,6 @@
   become: yes
   tasks:
    - name: copy dashboaord_yml file to grafana
-     copy: src=g/dash/ dest=/etc/grafana/provisioning/dashboards/
+     copy: src=dash/ dest=/etc/grafana/provisioning/dashboards/
    - name: restart grafana
      service: name=grafana-server state=restarted
