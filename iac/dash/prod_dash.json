@@ -108,7 +108,7 @@
             "type": "prometheus",
             "uid": "produid"
           },
-          "expr": "avg without(cpu) (irate(node_cpu_seconds_total{mode!=\"idle\"}[1m]))",
+          "expr": "avg without(cpu) (irate(node_cpu_seconds_total{instance=\"localhost:9100\",mode!=\"idle\"}[1m]))",
           "interval": "",
           "legendFormat": "{{mode}}",
           "refId": "A"
@@ -174,7 +174,7 @@
             "type": "prometheus",
             "uid": "produid"
           },
-          "expr": "node_memory_MemTotal_bytes{} - node_memory_MemFree_bytes{} - node_memory_Cached_bytes{} - node_memory_Buffers_bytes{}",
+          "expr": "node_memory_MemTotal_bytes{instance=\"localhost:9100\",} - node_memory_MemFree_bytes{instance=\"localhost:9100\",} - node_memory_Cached_bytes{instance=\"localhost:9100\",} - node_memory_Buffers_bytes{instance=\"localhost:9100\"}",
           "interval": "",
           "legendFormat": "Used",
           "refId": "A"
@@ -204,7 +204,7 @@
             "type": "prometheus",
             "uid": "produid"
           },
-          "expr": "node_memory_MemFree_bytes{}",
+          "expr": "node_memory_MemFree_bytes{instance=\"localhost:9100\"}",
           "interval": "",
           "legendFormat": "Free",
           "refId": "D"
@@ -270,7 +270,7 @@
             "type": "prometheus",
             "uid": "produid"
           },
-          "expr": "node_filesystem_size_bytes{device!~\"/dev/loop.*\", device!~\"tmpfs|nsfs\", device!=\"gvfsd-fuse\"} - node_filesystem_avail_bytes{}",
+          "expr": "node_filesystem_size_bytes{instance=\"localhost:9100\",device!~\"/dev/loop.*\", device!~\"tmpfs|nsfs\", device!=\"gvfsd-fuse\"} - node_filesystem_avail_bytes{instance=\"localhost:9100\"}",
           "interval": "",
           "legendFormat": "{{device}}",
           "refId": "A"
@@ -332,7 +332,7 @@
             "type": "prometheus",
             "uid": "produid"
           },
-          "expr": "node_filesystem_avail_bytes{device!~\"/dev/loop.*\",device!~\"tmpfs|nsfs\",device!=\"gvfsd-fuse\"} \n\n",
+          "expr": "node_filesystem_avail_bytes{instance=\"localhost:9100\",device!~\"/dev/loop.*\",device!~\"tmpfs|nsfs\",device!=\"gvfsd-fuse\"} \n\n",
           "interval": "",
           "legendFormat": "{{device}}",
           "refId": "A"

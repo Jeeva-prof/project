@@ -49,9 +49,9 @@ pipeline {
 		sudo terraform init
 		sudo terraform apply --auto-approve
 		sudo terraform output -raw testip >testhost | pwd 
-        sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' prometheus_test.yml
-  		sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' test_ds_.yaml | pwd
-    	sudo cp test_ds_.yaml /etc/grafana/provisioning/datasources/
+    sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' prometheus_test.yml
+    sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' dash/test_dash.json
+  	sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' ds/test_ds_.yaml 
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' testhost'''   
 		          }
 	    }
@@ -63,12 +63,12 @@ pipeline {
      	stage('Create production server') {
             steps {
       		sh '''sudo pwd
-		cd iac
-		sudo terraform output -raw prodip >prodhost
-        #sudo sed -i -e \'\'s/localhost/$(cat prodhost)/\'\' prometheus_production.yml
-        sudo sed -i -e \'\'s/localhost/$(cat prodhost)/\'\' prod_ds_.yaml
-  		sudo cp prod_ds_.yaml /etc/grafana/provisioning/datasources/
-		sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '''
+		            cd iac
+		            sudo terraform output -raw prodip >prodhost
+                sudo sed -i \'\'s/localhost/$(cat prodhost)/\'\' prometheus_production.yml
+                sudo sed -i \'\'s/localhost/$(cat prodhost)/\'\' dash/prod_dash.json
+                sudo sed -i \'\'s/localhost/$(cat prodhost)/\'\' ds/prod_ds_.yaml
+  		          sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '''
 		          }
 	    }
 	 stage('Deploy to production server') {
@@ -79,8 +79,7 @@ pipeline {
             }
 	 stage('Setup continous monitoring ') {
             steps {
-		sh '''sudo pwd 
-              sudo ansible-playbook g/playbookgrafana.yaml'''
+		          sh '''  sudo ansible-playbook iac/playbookgrafana.yaml'''
                 
                 }
             }
