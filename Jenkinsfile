@@ -49,9 +49,9 @@ pipeline {
 		sudo terraform init
 		sudo terraform apply --auto-approve
 		sudo terraform output -raw testip >testhost | pwd 
-    sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' prometheus_test.yml
-    sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' dash/test_dash.json
-  	sudo sed -i \'\'s/localhost/$(cat testhost)/\'\' ds/test_ds_.yaml 
+    sudo sed -i  \'\'s/localhost/$(cat testhost)/g\'\' prometheus_test.yml
+    sudo sed -i \'\'s/localhost/$(cat testhost)/g\'\' dash/test_dash.json
+  	sudo sed -i \'\'s/localhost/$(cat testhost)/g\'\' ds/test_ds_.yaml 
 		sudo sed -i \'s/$/  ansible_user=ubuntu/\' testhost'''   
 		          }
 	    }
@@ -65,9 +65,9 @@ pipeline {
       		sh '''sudo pwd
 		            cd iac
 		            sudo terraform output -raw prodip >prodhost
-                sudo sed -i \'\'s/localhost/$(cat prodhost)/\'\' prometheus_production.yml
-                sudo sed -i \'\'s/localhost/$(cat prodhost)/\'\' dash/prod_dash.json
-                sudo sed -i \'\'s/localhost/$(cat prodhost)/\'\' ds/prod_ds_.yaml
+                sudo sed -i \'\'s/localhost/$(cat prodhost)/g\'\' prometheus_production.yml
+                sudo sed -i \'\'s/localhost/$(cat prodhost)/g\'\' dash/prod_dash.json
+                sudo sed -i \'\'s/localhost/$(cat prodhost)/g\'\' ds/prod_ds_.yaml
   		          sudo sed -i \'s/$/  ansible_user=ubuntu/\' prodhost '''
 		          }
 	    }
