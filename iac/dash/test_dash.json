@@ -270,6 +270,7 @@
             "type": "prometheus",
             "uid": "testuid"
           },
+
           "expr": "node_filesystem_size_bytes{instance=\"localhost:9100\",device!~\"/dev/loop.*\", device!~\"tmpfs|nsfs\", device!=\"gvfsd-fuse\"} - node_filesystem_avail_bytes{instance=\"localhost:9100\"}",
           "interval": "",
           "legendFormat": "{{device}}",
