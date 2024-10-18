@@ -48,7 +48,8 @@ pipeline {
             withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-cred', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
 		dir('test'){
 	        sh ''' sudo pwd
-		 terraform init
+		sudo terraform init
+  		sudo terraform refresh
 		sudo terraform apply --auto-approve
 		sudo terraform output -raw testip >testhost | pwd 
    		sudo sed -i  \'\'s/localhost/$(cat testhost)/g\'\' prometheus_test.yml
