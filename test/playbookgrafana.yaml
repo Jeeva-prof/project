@@ -1,0 +1,11 @@
+---
+
+- hosts: localhost
+  become: yes
+  tasks:
+   - name: copy dashboaord_yml file to grafana
+     copy: src=dash/ dest=/etc/grafana/provisioning/dashboards/
+   - name: copy data_sourcr_yml file to grafana
+     copy: src=ds/ dest=/etc/grafana/provisioning/datasources/
+   - name: restart grafana
+     service: name=grafana-server state=restarted

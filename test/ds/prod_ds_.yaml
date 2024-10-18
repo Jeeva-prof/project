@@ -1,0 +1,50 @@
+# Configuration file version
+apiVersion: 1
+
+# List of data sources to delete from the database.
+deleteDatasources:
+  - name: Prometheus_prod
+    orgId: 1
+
+#prune: true
+
+datasources:
+  - name: Prometheus_prod
+    type: prometheus
+    access: proxy
+    orgId: 1
+    uid: produid
+    url: http://localhost:9090/
+    user:
+    database:
+    basicAuth:
+    basicAuthUser:
+    withCredentials:
+    isDefault:
+    # <map> Fields to convert to JSON and store in jsonData.
+    jsonData:
+      # <string> Defines the Graphite service's version.
+      graphiteVersion: '1.1'
+      # <bool> Enables TLS authentication using a client
+      # certificate configured in secureJsonData.
+      tlsAuth: false
+      # <bool> Enables TLS authentication using a CA
+      # certificate.
+      tlsAuthWithCACert: false
+    # <map> Fields to encrypt before storing in jsonData.
+    secureJsonData:
+      # <string> Defines the CA cert, client cert, and
+      # client key for encrypted authentication.
+      tlsCACert: '...'
+      tlsClientCert: '...'
+      tlsClientKey: '...'
+      # <string> Sets the database password, if necessary.
+      password:
+      # <string> Sets the basic authorization password.
+      basicAuthPassword:
+    # <int> Sets the version. Used to compare versions when
+    # updating. Ignored when creating a new data source.
+    version: 1
+    # <bool> Allows users to edit data sources from the
+    # Grafana UI.
+    editable: true
